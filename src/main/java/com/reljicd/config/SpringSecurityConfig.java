@@ -2,6 +2,7 @@ package com.reljicd.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -58,6 +59,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/home", "/registration", "/error", "/blog/**", "/post/**", "/h2-console/**").permitAll()
                 .antMatchers("/newPost/**", "/commentPost/**", "/createComment/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
@@ -92,7 +94,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // In memory authentication
         auth.inMemoryAuthentication()
-                .withUser(adminUsername).password(adminPassword).roles("ADMIN");
+                .withUser(adminUsername).password(passwordEncoder().encode(adminPassword)).roles("ADMIN");
     }
 
     /**

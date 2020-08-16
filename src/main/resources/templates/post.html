@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <title th:text="${post.title}">Post Title</title>
     <div th:replace="/fragments/header :: header-css"/>
 </head>
 <body>
@@ -21,9 +21,9 @@
         <!--Only show these buttons if the user is the owner of post-->
         <div sec:authorize="isAuthenticated()" th:if="${username}">
             <div class="row">
-                <a th:href="@{'/editPost/{id}'(id=${post.id})}" class="col-md-2">
-                    <button type="button" class="btn btn-primary btn-block" th:text="Edit">Edit</button>
-                </a>
+                <div class="col-md-2">
+                    <a th:href="@{'/editPost/{id}'(id=${post.id})}" class="btn btn-primary btn-block" th:text="Edit">Edit</a>
+                </div>
 
             </div>
         </div>
@@ -45,9 +45,9 @@
     <!--Only if authenticated-->
     <div sec:authorize="isAuthenticated()">
         <div class="row">
-            <a th:href="@{'/commentPost/{id}'(id=${post.id})}" class="col-md-2">
-                <button type="button" class="btn btn-primary btn-block" th:text="Comment">Comment</button>
-            </a>
+            <div class="col-md-2">
+                <a th:href="@{'/commentPost/{id}'(id=${post.id})}" class="btn btn-primary btn-block" th:text="Comment">Comment</a>
+            </div>
         </div>
     </div>
 </div>
