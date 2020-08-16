@@ -114,7 +114,7 @@ public class PostController {
 
             if (isPrincipalOwnerOfPost(principal, post)) {
                 postService.delete(post);
-                return "redirect:/home";
+                return "redirect:/";
             } else {
                 return "/403";
             }

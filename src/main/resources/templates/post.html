@@ -36,23 +36,7 @@
     <!--/Post-->
 
     <!--Comments-->
-    <h5>Comments:</h5>
-    <div class="well" th:each="comment : ${post.comments}">
-        <p th:text="${comment.body}">Body</p>
-        <div th:text="${#dates.format(comment.createDate, 'MMM-dd-yyyy')} + ${comment.user.username}' said '">
-            Posted
-        </div>
-    </div>
 
-    <!--Leave a comment button-->
-    <!--Only if authenticated-->
-    <div sec:authorize="isAuthenticated()">
-        <div class="row">
-            <div class="col-md-2">
-                <a th:href="@{'/commentPost/{id}'(id=${post.id})}" class="btn btn-primary btn-block" th:text="Comment">Comment</a>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div th:replace="/fragments/footer :: footer" />

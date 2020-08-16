@@ -50,7 +50,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      * HTTPSecurity configurer
      * - roles ADMIN allow to access /admin/**
      * - roles USER allow to access /user/** and /newPost/**
-     * - anybody can visit /, /home, /registration, /error, /blog/**, /post/**, /h2-console/**
+     * - anybody can visit /, /registration, /error, /blog/**, /post/**, /h2-console/**
      * - every other page needs authentication
      * - custom 403 access denied handler
      */
@@ -60,13 +60,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/home", "/registration", "/error", "/blog/**", "/post/**", "/h2-console/**").permitAll()
-                .antMatchers("/newPost/**", "/commentPost/**", "/createComment/**").hasAnyRole("USER")
+                .antMatchers("/", "/registration", "/error", "/blog/**", "/post/**", "/h2-console/**").permitAll()
+                .antMatchers("/newPost/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()

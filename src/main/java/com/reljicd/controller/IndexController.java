@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HomeController {
+public class IndexController {
 
     private final PostService postService;
 
     @Autowired
-    public HomeController(PostService postService) {
+    public IndexController(PostService postService) {
         this.postService = postService;
     }
 
-    @GetMapping("/home")
-    public String home(@RequestParam(defaultValue = "0") int page,
+    @GetMapping("/")
+    public String index(@RequestParam(defaultValue = "0") int page,
                        Model model) {
 
         Page<Post> posts = postService.findAllOrderedByDatePageable(page);
@@ -29,6 +29,6 @@ public class HomeController {
 
         model.addAttribute("pager", pager);
 
-        return "/home";
+        return "index";
     }
 }
