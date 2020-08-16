@@ -18,7 +18,7 @@
             </span>
 
             <span th:if="${pager.getTotalPages() != 1}"
-                  th:text="'Page ' + ${pager.getPageIndex()} + ' of ' + ${pager.getTotalPages()} + '.'">
+                  th:text="'Page ' + ${pager.getPageIndex()} + ' of ' + ${pager.getTotalPages()}">
             </span>
 
             <span th:if="${pager.hasNext()}">

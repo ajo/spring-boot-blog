@@ -1,22 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
 <body>
 <div th:fragment="posts">
 
-    <div class="starter-template panel" th:each="post : ${pager.posts}">
-        <div class="panel-heading">
-            <h1><a th:text="${post.title}" th:href="@{'/post/' + ${post.id}}">Title</a></h1>
-            <div th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')} + ' by '">
-                Created by
-            </div>
-            <div><a th:text="${post.user.username}" th:href="@{'/blog/' + ${post.user.username}}">User</a>
-            </div>
-        </div>
-        <h3 class="panel-body" th:text="${post.body}">Body</h3>
-        <br></br>
-    </div>
+    <!--Post-->
+    <div class="card mt-3 mb-3" th:each="post : ${pager.posts}">
 
+        <div class="card-body">
+            <h2 class="card-title"><a th:text="${post.title}" th:href="@{'/post/' + ${post.id}}">Title</a></h2>
+                <small>
+                    Posted <th:block th:text="${#dates.format(post.createDate, 'MMM-dd-yyyy')} + ' by '"></th:block> <a class="text-capitalize" th:text="${post.user.username}" th:href="@{'/blog/' + ${post.user.username}}">User</a>
+                </small>
+
+                <!--Preview-->
+                <p class="card-text" th:text="${post.body}">Body</p>
+
+                <a class="ml-auto" th:href="@{'/post/' + ${post.id}}">Read More...</a>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

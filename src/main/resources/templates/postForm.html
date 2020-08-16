@@ -18,8 +18,8 @@
         <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
 
         <!--New Post Form-->
-        <div class="row" style="margin-top:20px">
-            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+        <div class="row mt-3 justify-content-center">
+            <div class="col-xs-12 col-sm-8 col-md-6 text-center">
                 <form autocomplete="off" action="#" th:action="@{/newPost}"
                       th:object="${post}" method="post" class="form-horizontal"
                       role="form">

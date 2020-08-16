@@ -1,20 +1,11 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="footer">
-    <hr />
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                    <span sec:authorize="isAuthenticated()">
-                        | Logged user: <span sec:authentication="name"></span> | Roles: <span sec:authentication="principal.authorities"></span> |
-                        <a th:href="@{/logout}">Sign Out</a>
-                    </span>
-                <div>
-                    <p class="text-center">&copy; copyright</p>
-                </div>
-            </div>
+    <footer class="footer bg-dark">
+        <div class="container text-center">
+            <span class="text-muted">Content Copyright 2020 | Fork this blog on <a href="https://github.com/ajo/spring-boot-blog">GitHub</a></span>
         </div>
-    </div>
-    <script src="/webjars/jquery/2.1.4/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </footer>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </div>
 </html>
