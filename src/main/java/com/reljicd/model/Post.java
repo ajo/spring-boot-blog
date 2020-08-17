@@ -3,15 +3,18 @@ package com.reljicd.model;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
 import java.util.Date;
 
 @Entity
 @Table(name = "post")
 public class Post {
+
+    @Transient
+    private static final int PREVIEW_MAX_LENGTH = 240;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +61,19 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String getPreview(){
+
+        String preview;
+
+        if (body.length() <= PREVIEW_MAX_LENGTH){
+            preview = body;
+        } else {
+            preview = body.substring(0, PREVIEW_MAX_LENGTH);
+        }
+
+        return preview.concat("...");
     }
 
     public Date getCreateDate() {
