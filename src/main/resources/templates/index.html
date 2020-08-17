@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Blog Title</title>
-    <th:block th:replace="/fragments/header :: header-css"/>
+    <th:block th:replace="fragments/header :: header-css"/>
 
 </head>
 <body>
 
-<div th:replace="/fragments/header :: header"/>
+<div th:replace="fragments/header :: header"/>
 
 <div class="container">
 
-    <div th:replace="/fragments/posts :: posts"/>
+    <div th:replace="fragments/posts :: posts"/>
 
-    <div th:replace="/fragments/pagination :: pagination(URLparameter='/')"/>
+    <div th:replace="fragments/pagination :: pagination(URLparameter='/')"/>
 
 </div>
 
-<div th:replace="/fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>

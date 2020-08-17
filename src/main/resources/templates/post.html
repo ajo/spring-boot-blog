@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="${post.title}">Post Title</title>
-    <div th:replace="/fragments/header :: header-css" />
+    <div th:replace="fragments/header :: header-css" />
 </head>
 <body>
-<div th:replace="/fragments/header :: header" />
+<div th:replace="fragments/header :: header" />
 
 <div class="container bg-light mt-5">
 
@@ -39,6 +39,6 @@
 
 </div>
 
-<div th:replace="/fragments/footer :: footer" />
+<div th:replace="fragments/footer :: footer" />
 </body>
 </html>

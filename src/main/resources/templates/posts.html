@@ -2,23 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Blog Title</title>
-    <div th:replace="/fragments/header :: header-css"/>
+    <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
-<div th:replace="/fragments/header :: header"/>
+<div th:replace="fragments/header :: header"/>
 
 <div class="container">
 
     <h2 class="mt-3 text-capitalize" th:text="'Posts by ' + ${user.getUsername()}">Posts by</h2>
 
-    <div th:replace="/fragments/posts :: posts"/>
+    <div th:replace="fragments/posts :: posts"/>
 
-    <div th:replace="/fragments/pagination :: pagination(URLparameter='/blog/' + ${user.username})"/>
+    <div th:replace="fragments/pagination :: pagination(URLparameter='/blog/' + ${user.username})"/>
 
 </div>
 
-<div th:replace="/fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>

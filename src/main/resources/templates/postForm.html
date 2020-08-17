@@ -4,12 +4,12 @@
     <title th:if="${!post.id}">Create Post</title>
     <title th:if="${post.id}" th:text="'Edit ' + ${post.getId()}"></title>
 
-    <div th:replace="/fragments/header :: header-css"/>
+    <div th:replace="fragments/header :: header-css"/>
 
 </head>
 <body>
 
-<div th:replace="/fragments/header :: header"/>
+<div th:replace="fragments/header :: header"/>
 
 <div class="container">
 
@@ -63,7 +63,7 @@
 
 </div>
 
-<div th:replace="/fragments/footer :: footer"/>
+<div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>
