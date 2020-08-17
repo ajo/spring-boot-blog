@@ -43,7 +43,7 @@ public class BlogController {
             model.addAttribute("pager", pager);
             model.addAttribute("user", user);
 
-            return "/posts";
+            return "posts";
 
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

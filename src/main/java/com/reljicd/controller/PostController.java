@@ -39,7 +39,7 @@ public class PostController {
 
             model.addAttribute("post", post);
 
-            return "/postForm";
+            return "postForm";
 
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -69,7 +69,7 @@ public class PostController {
 
             if (isPrincipalOwnerOfPost(principal, post)) {
                 model.addAttribute("post", post);
-                return "/postForm";
+                return "postForm";
             } else {
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN);
             }
@@ -94,7 +94,7 @@ public class PostController {
                 model.addAttribute("username", principal.getName());
             }
 
-            return "/post";
+            return "post";
 
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
