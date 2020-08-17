@@ -1,6 +1,6 @@
-FROM openjdk:8u151-jdk-alpine3.7
+FROM lpicanco/java11-alpine
 
-EXPOSE 8090
+EXPOSE 8080
 
 ENV APP_HOME /usr/src/app
 

@@ -101,9 +101,8 @@ public class PostController {
         }
     }
 
-    @DeleteMapping(value = "/post/{id}")
-    public String deletePostWithId(@PathVariable Long id,
-                                   Principal principal) {
+    @GetMapping(value = "/post/{id}/delete")
+    public String deletePostWithId(@PathVariable Long id, Principal principal) {
 
         Optional<Post> optionalPost = postService.findForId(id);
 
