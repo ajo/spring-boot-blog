@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title th:if="${post.getId()}">Create Post</title>
-    <title th:if="${post.getId()}" th:text="'Edit ' + ${post.getId()}"></title>
+    <title th:text="${post.getId() != null} ? 'Edit ' + ${post.getTitle()} : 'New Post'"></title>
 
     <div th:replace="fragments/header :: header-css"/>
 
