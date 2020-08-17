@@ -21,8 +21,7 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String index(@RequestParam(defaultValue = "0") int page,
-                       Model model) {
+    public String index(@RequestParam(defaultValue = "0") int page, Model model) {
 
         Page<Post> posts = postService.findAllOrderedByDatePageable(page);
         Pager pager = new Pager(posts);

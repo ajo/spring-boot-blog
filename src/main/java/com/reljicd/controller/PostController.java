@@ -5,12 +5,12 @@ import com.reljicd.model.User;
 import com.reljicd.service.PostService;
 import com.reljicd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -28,9 +28,8 @@ public class PostController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/newPost", method = RequestMethod.GET)
-    public String newPost(Principal principal,
-                          Model model) {
+    @GetMapping(value = "/newPost")
+    public String newPost(Principal principal, Model model) {
 
         Optional<User> user = userService.findByUsername(principal.getName());
 
@@ -43,13 +42,12 @@ public class PostController {
             return "/postForm";
 
         } else {
-            return "/error";
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value = "/newPost", method = RequestMethod.POST)
-    public String createNewPost(@Valid Post post,
-                                BindingResult bindingResult) {
+    @PostMapping(value = "/newPost")
+    public String createNewPost(@Valid Post post, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "/postForm";
@@ -59,7 +57,7 @@ public class PostController {
         }
     }
 
-    @RequestMapping(value = "/editPost/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/editPost/{id}")
     public String editPostWithId(@PathVariable Long id,
                                  Principal principal,
                                  Model model) {
@@ -73,15 +71,15 @@ public class PostController {
                 model.addAttribute("post", post);
                 return "/postForm";
             } else {
-                return "/403";
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN);
             }
 
         } else {
-            return "/error";
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/post/{id}")
     public String getPostWithId(@PathVariable Long id,
                                 Principal principal,
                                 Model model) {
@@ -99,11 +97,11 @@ public class PostController {
             return "/post";
 
         } else {
-            return "/error";
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value = "/post/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/post/{id}")
     public String deletePostWithId(@PathVariable Long id,
                                    Principal principal) {
 
@@ -116,11 +114,11 @@ public class PostController {
                 postService.delete(post);
                 return "redirect:/";
             } else {
-                return "/403";
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN);
             }
 
         } else {
-            return "/error";
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
