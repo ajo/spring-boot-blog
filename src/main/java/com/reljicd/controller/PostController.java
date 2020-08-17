@@ -50,7 +50,7 @@ public class PostController {
     public String createNewPost(@Valid Post post, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "/postForm";
+            return "postForm";
         } else {
             postService.save(post);
             return "redirect:/blog/" + post.getUser().getUsername();
