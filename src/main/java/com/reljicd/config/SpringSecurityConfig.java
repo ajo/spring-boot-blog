@@ -1,14 +1,15 @@
 package com.reljicd.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -21,24 +22,12 @@ import javax.sql.DataSource;
  *
  * @author Dusan
  */
+@EnableWebSecurity
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AccessDeniedHandler accessDeniedHandler;
-
-    final DataSource dataSource;
-
-    @Value("${spring.admin.username}")
-    private String adminUsername;
-
-    @Value("${spring.admin.username}")
-    private String adminPassword;
-
-    @Value("${spring.queries.users-query}")
-    private String usersQuery;
-
-    @Value("${spring.queries.roles-query}")
-    private String rolesQuery;
+    private final DataSource dataSource;
 
     @Autowired
     public SpringSecurityConfig(AccessDeniedHandler accessDeniedHandler, DataSource dataSource) {
@@ -60,8 +49,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/", "/registration", "/error", "/blog/**", "/post/**", "/h2-console/**").permitAll()
-                .antMatchers("/newPost/**").hasAnyRole("USER")
+                .antMatchers("/", "/registration", "/error", "/blog/**", "/post/**").permitAll()
+                .antMatchers("/newPost/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/h2-console/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -87,21 +77,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // Database authentication
         auth.
                 jdbcAuthentication()
-                .usersByUsernameQuery(usersQuery)
-                .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource)
-                .passwordEncoder(passwordEncoder());
-
-        // In memory authentication
-        auth.inMemoryAuthentication()
-                .withUser(adminUsername).password(passwordEncoder().encode(adminPassword)).roles("ADMIN");
+                .usersByUsernameQuery("select username, password, enabled from user where username=?")
+                .authoritiesByUsernameQuery("select u.username, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.username=?")
+                .dataSource(dataSource);
     }
 
-    /**
-     * Configure and return BCrypt password encoder
-     */
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 

@@ -21,10 +21,10 @@
                 <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link text-light" th:href="@{/login}">Login</a></li>
 
                 <!-- show My Blog only if user is authenticated -->
-                <li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link text-light" th:href="@{'/blog/' + ${#authentication.getName()}}">My Posts</a></li>
+                <li sec:authorize="hasRole('USER') || hasRole('ADMIN')" class="nav-item"><a class="nav-link text-light" th:href="@{'/blog/' + ${#authentication.getName()}}">My Posts</a></li>
 
                 <!-- show new post only if user is authenticated -->
-                <li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link text-light" th:href="@{/newPost}">New Post</a></li>
+                <li sec:authorize="hasRole('USER') || hasRole('ADMIN')" class="nav-item"><a class="nav-link text-light" th:href="@{/newPost}">New Post</a></li>
 
                 <!-- show sign out only if user is authenticated -->
                 <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-light" th:href="@{/logout}">Sign Out</a></li>

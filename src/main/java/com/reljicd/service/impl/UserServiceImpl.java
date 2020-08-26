@@ -15,16 +15,10 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    private static final String USER_ROLE = "ROLE_USER";
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -39,11 +33,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        // Encode plaintext password
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActive(1);
-        // Set Role to ROLE_USER
-        user.setRoles(Collections.singletonList(roleRepository.findByRole(USER_ROLE)));
-        return userRepository.saveAndFlush(user);
+        return userRepository.save(user);
     }
+
+    @Override
+    public long count() {
+        return userRepository.count();
+    }
+
+
 }

@@ -41,10 +41,9 @@ public class User {
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
 
-    @Column(name = "active", nullable = false)
-    private int active;
+    private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
@@ -99,12 +98,12 @@ public class User {
         this.email = email;
     }
 
-    public int getActive() {
-        return active;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setActive(int active) {
-        this.active = active;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Collection<Role> getRoles() {

@@ -26,4 +26,6 @@ public interface PostService {
     Page<Post> findAllOrderedByDatePageable(int page);
 
     void delete(Post post);
+
+    long count();
 }
