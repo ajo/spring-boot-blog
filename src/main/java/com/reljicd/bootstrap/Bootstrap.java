@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-@Profile("default")
+@Profile({"default", "demo"})
 @Component
 public class Bootstrap implements CommandLineRunner {
 

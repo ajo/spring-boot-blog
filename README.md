@@ -13,10 +13,6 @@ Admin
 - username: **admin**
 - password: **admin**
 
-User 
-- username: **user**
-- password: **password**
-
 [A demo](https://springblogdemo.herokuapp.com/) of the latest build is hosted on Heroku. The first load may take a 
 moment as the Dyno sleeps when not in use.
 
