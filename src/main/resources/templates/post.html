@@ -21,7 +21,7 @@
                 </span>
             </small>
 
-            <p class="mt-2 card-text" th:text="${post.body}">Body</p>
+            <div id="postBody" class="mt-2 card-text" th:utext="${post.getBodyHTML()}">Body</div>
 
             <!--Editing tools-->
             <div sec:authorize="isAuthenticated()" th:if="${username}">
@@ -35,10 +35,9 @@
     </div>
     <!--/Post-->
 
-    <!--Comments-->
-
 </div>
 
 <div th:replace="fragments/footer :: footer" />
+
 </body>
 </html>

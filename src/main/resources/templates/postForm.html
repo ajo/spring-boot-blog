@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title th:text="${post.getId() != null} ? 'Edit ' + ${post.getTitle()} : 'New Post'"></title>
+    <link rel="stylesheet" href="/webjars/simplemde/dist/simplemde.min.css">
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -26,14 +27,14 @@
                     <div class="form-group">
                         <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
                                class="alert alert-danger"></label>
-                        <input type="text" th:field="*{title}" placeholder="Title"
+                        <input type="text" th:field="*{title}" placeholder="Post Title"
                                class="form-control input-lg"/>
                     </div>
 
                     <div class="form-group">
                         <label th:if="${#fields.hasErrors('body')}" th:errors="*{body}"
                                class="alert alert-danger"></label>
-                        <textarea th:field="*{body}" placeholder="Body"
+                        <textarea id="postContent" th:field="*{body}" placeholder="Post Content"
                                   class="form-control input-lg"/>
                     </div>
 
@@ -64,5 +65,9 @@
 
 <div th:replace="fragments/footer :: footer"/>
 
+<script src="/webjars/simplemde/dist/simplemde.min.js"></script>
+<script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("postContent") });
+</script>
 </body>
 </html>

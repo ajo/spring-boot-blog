@@ -12,9 +12,9 @@
                 </small>
 
                 <!--Preview-->
-                <p class="card-text" th:text="${post.getPreview()}">Body</p>
+                <p class="card-text" th:utext="${post.getPreview()}">Body</p>
 
-                <a class="ml-auto" th:href="@{'/post/' + ${post.id}}">Read More...</a>
+                <a class="ml-auto" th:href="@{'/post/' + ${post.id}}">Read More</a>
         </div>
 
     </div>

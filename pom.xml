@@ -82,19 +82,35 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Optional, for bootstrap -->
+        <!-- Bootstrap -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>4.5.0</version>
         </dependency>
-        <!-- Optional, for jQuery -->
+
+        <!-- jQuery -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>3.5.1</version>
         </dependency>
-    </dependencies>
+
+        <!-- Markdown Editor -->
+        <dependency>
+            <groupId>org.webjars.bowergithub.sparksuite</groupId>
+            <artifactId>simplemde-markdown-editor</artifactId>
+            <version>1.11.2</version>
+        </dependency>
+
+        <!-- Markdown Renderer -->
+        <dependency>
+            <groupId>com.atlassian.commonmark</groupId>
+            <artifactId>commonmark</artifactId>
+            <version>0.15.2</version>
+        </dependency>
+
+</dependencies>
 
     <build>
         <plugins>

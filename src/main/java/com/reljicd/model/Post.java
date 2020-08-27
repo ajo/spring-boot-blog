@@ -1,5 +1,8 @@
 package com.reljicd.model;
 
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
@@ -14,7 +17,7 @@ import java.util.Date;
 public class Post {
 
     @Transient
-    private static final int PREVIEW_MAX_LENGTH = 240;
+    private static final int PREVIEW_MAX_LENGTH = 1000;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,17 +66,18 @@ public class Post {
         this.body = body;
     }
 
+    public String getBodyHTML() {
+        return convertMarkdownToHtml(body);
+    }
+
     public String getPreview(){
 
-        String preview;
-
         if (body.length() <= PREVIEW_MAX_LENGTH){
-            preview = body;
+            return convertMarkdownToHtml(body).concat("...");
         } else {
-            preview = body.substring(0, PREVIEW_MAX_LENGTH);
+            return convertMarkdownToHtml(body.substring(0, PREVIEW_MAX_LENGTH).concat("..."));
         }
 
-        return preview.concat("...");
     }
 
     public Date getCreateDate() {
@@ -92,4 +96,10 @@ public class Post {
         this.user = user;
     }
 
+    private String convertMarkdownToHtml(String markdown){
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse(markdown);
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        return renderer.render(document);
+    }
 }
