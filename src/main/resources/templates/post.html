@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title th:text="${post.title}">Post Title</title>
+    <link href="/webjars/highlightjs/10.1.2/styles/darcula.min.css" rel="stylesheet">
     <div th:replace="fragments/header :: header-css" />
 </head>
 <body>
@@ -38,6 +39,16 @@
 </div>
 
 <div th:replace="fragments/footer :: footer" />
+
+<!-- Syntax Highlighting -->
+<script src="/webjars/highlightjs/10.1.2/highlight.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('code').forEach((block) => {
+            hljs.highlightBlock(block);
+        });
+    }, false);
+</script>
 
 </body>
 </html>

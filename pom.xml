@@ -110,6 +110,13 @@
             <version>0.15.2</version>
         </dependency>
 
+        <!-- Syntax Highlighting -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>highlightjs</artifactId>
+            <version>10.1.2</version>
+        </dependency>
+
 </dependencies>
 
     <build>
