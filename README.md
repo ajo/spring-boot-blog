@@ -31,4 +31,8 @@ moment as the Dyno sleeps when not in use.
     - Overhauled visual styling.
     - Updated depreciated code.
     - Pages are now valid HTML.
-    - Improved SEO
+    - Improved SEO.
+    - Dependencies provided by webjars.
+    - Posts now use Markdown
+    - Added Syntax Highlighting
+    - Demo / Test environment runs on H2, production (default) runs on MySQL. 
