@@ -46,7 +46,7 @@ public class BlogController {
             return "posts";
 
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That user does not have any posts.");
         }
     }
 }
